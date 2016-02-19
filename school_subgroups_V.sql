@@ -6,7 +6,7 @@ with ENROLL_OCT as
 					,GR.grade
 					,BLD.BUILDING_TYPE
 		FROM SPPF..GRADE			AS	GR
-		JOIN	SPPF..BUILDING		AS	BLD
+		JOIN	SPPF..BUILDING			AS	BLD
 		ON		GR.BUILDING_ID	=	BLD.BUILDING_ID
 
 		WHERE	BLD.BUILDING_TYPE IN ('E', 'EH', 'H', 'IN')
@@ -21,6 +21,7 @@ AND		(
 		)
 		) ,
 --IDENTIFYING SPED STATUS 		
+
 		SPED	AS 
 		(
 		SELECT	STUDENT_ID,
@@ -35,7 +36,8 @@ AND		(
 			WHEN year = 'sped2014' THEN	'2014'
 			WHEN year = 'sped2015' THEN	'2015'
 			WHEN year = 'sped2016' THEN	'2016'
-		END,
+		END
+						AS SCHOOL_YEAR,
 		SPED
 		FROM (
 		SELECT	STUDENT_ID,
@@ -93,7 +95,7 @@ AND		(
 					(disability_end_date>'10.15.2015' OR DISABILITY_END_DATE IS NULL)) THEN 1
 					ELSE NULL
 					END
-		FROM SPPF..SPECIAL_EDUCATION ) p
+		FROM SPPF..SPECIAL_EDUCATION ) p 
 
 		UNPIVOT
 
@@ -112,7 +114,7 @@ LEP		AS
 					WHEN LAUCODE='A'	THEN	1
 					WHEN LAUCODE='B'	THEN	1
 					WHEN LAUCODE='C'	THEN	1
-					ELSE						NULL
+					ELSE	NULL
 					END
 		FROM SPPF..LEP_V
 		),
@@ -139,10 +141,10 @@ GIFTED	AS
 			SELECT	GIFT.STUDENT_ID,
 					"gifted2008" = 
 						CASE
-						WHEN (	cognitive_idate<='10.15.2007'	OR
+						WHEN (	cognitive_idate<='10.15.2007'			OR
 								math_idate<='10.15.2007'		OR
 								science_idate<='10.15.2007'		OR
-								readwrite_idate<='10.15.2007'	OR
+								readwrite_idate<='10.15.2007'		OR
 								soc_idate<='10.15.2007'			OR
 								create_idate<='10.15.2007'		OR
 								visual_idate>'10.15.2007') THEN 1
@@ -150,10 +152,10 @@ GIFTED	AS
 						END,
 					"gifted2009" = 
 						CASE
-						WHEN (	cognitive_idate<='10.15.2008'	OR
+						WHEN (	cognitive_idate<='10.15.2008'			OR
 								math_idate<='10.15.2008'		OR
 								science_idate<='10.15.2008'		OR
-								readwrite_idate<='10.15.2008'	OR
+								readwrite_idate<='10.15.2008'		OR
 								soc_idate<='10.15.2008'			OR
 								create_idate<='10.15.2008'		OR
 								visual_idate>'10.15.2008') THEN 1
@@ -161,10 +163,10 @@ GIFTED	AS
 						END,
 					"gifted2010" = 
 						CASE
-						WHEN (	cognitive_idate<='10.15.2009'	OR
+						WHEN (	cognitive_idate<='10.15.2009'			OR
 								math_idate<='10.15.2009'		OR
 								science_idate<='10.15.2009'		OR
-								readwrite_idate<='10.15.2009'	OR
+								readwrite_idate<='10.15.2009'		OR
 								soc_idate<='10.15.2009'			OR
 								create_idate<='10.15.2009'		OR
 								visual_idate>'10.15.2009') THEN 1
@@ -172,10 +174,10 @@ GIFTED	AS
 						END,
 					"gifted2011" = 
 						CASE
-						WHEN (	cognitive_idate<='10.15.2010'	OR
+						WHEN (	cognitive_idate<='10.15.2010'			OR
 								math_idate<='10.15.2010'		OR
 								science_idate<='10.15.2010'		OR
-								readwrite_idate<='10.15.2010'	OR
+								readwrite_idate<='10.15.2010'		OR
 								soc_idate<='10.15.2010'			OR
 								create_idate<='10.15.2010'		OR
 								visual_idate>'10.15.2010') THEN 1
@@ -183,10 +185,10 @@ GIFTED	AS
 						END,
 					"gifted2012" = 
 						CASE
-						WHEN (	cognitive_idate<='10.15.2011'	OR
+						WHEN (	cognitive_idate<='10.15.2011'			OR
 								math_idate<='10.15.2011'		OR
 								science_idate<='10.15.2011'		OR
-								readwrite_idate<='10.15.2011'	OR
+								readwrite_idate<='10.15.2011'		OR
 								soc_idate<='10.15.2011'			OR
 								create_idate<='10.15.2011'		OR
 								visual_idate>'10.15.2011') THEN 1
@@ -194,10 +196,10 @@ GIFTED	AS
 						END,
 					"gifted2013" = 
 						CASE
-						WHEN (	cognitive_idate<='10.15.2012'	OR
+						WHEN (	cognitive_idate<='10.15.2012'			OR
 								math_idate<='10.15.2012'		OR
 								science_idate<='10.15.2012'		OR
-								readwrite_idate<='10.15.2012'	OR
+								readwrite_idate<='10.15.2012'		OR
 								soc_idate<='10.15.2012'			OR
 								create_idate<='10.15.2012'		OR
 								visual_idate>'10.15.2012') THEN 1
@@ -205,21 +207,21 @@ GIFTED	AS
 						END,
 					"gifted2014" = 
 						CASE
-						WHEN (	cognitive_idate<='10.15.2013'	OR
-							math_idate<='10.15.2013'		OR
-							science_idate<='10.15.2013'		OR
-							readwrite_idate<='10.15.2013'	OR
-							soc_idate<='10.15.2013'			OR
-							create_idate<='10.15.2013'		OR
+						WHEN (	cognitive_idate<='10.15.2013'			OR
+							math_idate<='10.15.2013'			OR
+							science_idate<='10.15.2013'			OR
+							readwrite_idate<='10.15.2013'			OR
+							soc_idate<='10.15.2013'				OR
+							create_idate<='10.15.2013'			OR
 							visual_idate>'10.15.2013') THEN 1
 						ELSE NULL
 						END,
 					"gifted2015" = 
 						CASE
-						WHEN (	cognitive_idate<='10.15.2014'	OR
+						WHEN (	cognitive_idate<='10.15.2014'		OR
 							math_idate<='10.15.2014'		OR
 							science_idate<='10.15.2014'		OR
-							readwrite_idate<='10.15.2014'	OR
+							readwrite_idate<='10.15.2014'		OR
 							soc_idate<='10.15.2014'			OR
 							create_idate<='10.15.2014'		OR
 							visual_idate>'10.15.2014') THEN 1
@@ -227,10 +229,10 @@ GIFTED	AS
 						END,
 					"gifted2016" = 
 						CASE
-						WHEN (	cognitive_idate<='10.15.2015'	OR
+						WHEN (	cognitive_idate<='10.15.2015'			OR
 								math_idate<='10.15.2015'		OR
 								science_idate<='10.15.2015'		OR
-								readwrite_idate<='10.15.2015'	OR
+								readwrite_idate<='10.15.2015'		OR
 								soc_idate<='10.15.2015'			OR
 								create_idate<='10.15.2015'		OR
 								visual_idate>'10.15.2015') THEN 1
@@ -247,16 +249,16 @@ GIFTED	AS
 		 
 SELECT	ENROLL_OCT.SCHOOL_CODE
 		,ENROLL_OCT.SCHOOL_YEAR
-		,count(ENROLL_OCT.student_id)						AS		student_n	
-		,isnull(sum(SPED.SPED), 0)							AS		sped_n
-		,isnull(sum(LEP.LEP), 0)							AS		lep_n
-		,isnull(sum(gifted.gifted), 0)						AS		gifted_n
+		,count(ENROLL_OCT.student_id)						AS student_n	
+		,isnull(sum(SPED.SPED), 0)						AS sped_n
+		,isnull(sum(LEP.LEP), 0)						AS lep_n
+		,isnull(sum(gifted.gifted), 0)						AS gifted_n
 		,isnull(SUM(cast(SPED.SPED as float)) /
-		count(cast(enroll_oct.student_id AS FLOAT))*100, 0)	AS		sped_percent
+		count(cast(enroll_oct.student_id AS FLOAT))*100, 0)			AS sped_percent
 		,isnull(SUM(cast(LEP.LEP as float)) /
-		count(cast(enroll_oct.student_id as float))*100, 0)	AS		lep_percent
+		count(cast(enroll_oct.student_id as float))*100, 0)			AS lep_percent
 		,isnull(SUM(cast(gifted.gifted as float)) /
-		count(cast(enroll_oct.student_id as float))*100, 0)	AS		gifted_percent
+		count(cast(enroll_oct.student_id as float))*100, 0)			AS gifted_percent
 /*
 	   Name:		school_subgroups_V
 	   Author:	Damico, Nicholas J
